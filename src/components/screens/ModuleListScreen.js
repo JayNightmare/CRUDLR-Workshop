@@ -23,9 +23,7 @@ const ModuleListScreen = () => {
         if (response.isSuccess) setModules(response.result);
     }
 
-    useEffect(() => {
-        loadMoudles(modulesEndpoint);
-    }, []);
+    useEffect(() => { loadMoudles(modulesEndpoint); }, []);
 
     const handleDelete = (module) => { 
         setModules(modules.filter((item) => item.ModuleID !== module.ModuleID)); 
