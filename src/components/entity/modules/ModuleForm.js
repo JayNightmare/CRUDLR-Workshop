@@ -37,11 +37,8 @@ const ModuleForm = ({ ogModule, onSubmit, onCancel }) => {
 
     const handleChange = (field, value) => setModule({ ...module, [field]: value });
     const handleSubmit = () => {
-        if (typeof onSubmit === 'function') {
-            onSubmit(module); // Make sure `onSubmit` is called here
-        } else {
-            console.error('onSubmit is not a function:', onSubmit);
-        }
+        if (typeof onSubmit === 'function') {onSubmit(module); }
+        else { console.error('onSubmit is not a function:', onSubmit); }
     };
 
     const submitLabel = ogModule ? 'Update Module' : 'Add Module';
