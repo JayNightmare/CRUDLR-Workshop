@@ -16,7 +16,7 @@ const ModuleListScreen = () => {
 
     const navigation = useNavigation();
 
-    const [ modules, isLoading, setModules, loadModules ] = useLoad(modulesEndpoint); 
+    const [ modules, isLoading, , loadModules ] = useLoad(modulesEndpoint); 
     
     const onDelete = async (module) => {
         const deleteEndpoint = `${modulesEndpoint}/${module.ModuleID}`;
@@ -42,7 +42,7 @@ const ModuleListScreen = () => {
         const result = await API.put(putEndpoint, module);
         if (result.isSuccess) {
             loadModules(modulesEndpoint);
-            navigation.navigate('ModuleListScreen');
+            navigation.navigate('ModuleViewScreen');
         } else { Alert.alert(result.message); }
     }
 
