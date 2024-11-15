@@ -15,7 +15,7 @@ const defaultModule = {
 
 const ModuleForm = ({ ogModule, onSubmit, onCancel }) => {
     defaultModule.ModuleID = Math.floor(100000 + Math.random() * 900000);
-    defaultModule.ModuleImage = 'https://via.placeholder.com/150';
+    defaultModule.ModuleImageURL = 'https://via.placeholder.com/150x150';
 
     const yearsEndpoint = 'https://softwarehub.uk/unibase/api/years';
     const staffEndpoint = 'https://softwarehub.uk/unibase/api/users/staff';
@@ -60,7 +60,7 @@ const ModuleForm = ({ ogModule, onSubmit, onCancel }) => {
             <Form.InputSelect label="Module Level" prompt="Select Module Level" options={levels} value={module.ModuleLevel} onChange={(value) => handleChange('ModuleLevel', value)} />
             <Form.InputSelect label="Module Cohort" prompt="Select Module Cohort" options={cohorts} isLoading={isYearsLoading} value={module.ModuleYearID} onChange={(value) => handleChange('ModuleYearID', value)} />
             <Form.InputSelect label="Module Leader" prompt="Select Leader" options={staff} isLoading={isLeadersLoading} value={module.ModuleLeaderID} onChange={(value) => handleChange('ModuleLeaderID', value)} />
-            <Form.InputText label="Module Image" value={module.ModuleImage} onChange={(value) => handleChange('ModuleImage', value)} />
+            <Form.InputText label="Module Image" value={module.ModuleImageURL} onChange={(value) => handleChange('ModuleImage', value)} />
         </Form>
     )
 }

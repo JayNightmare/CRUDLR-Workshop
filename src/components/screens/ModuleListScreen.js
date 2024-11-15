@@ -1,7 +1,7 @@
 import React from "react";
-import { StatusBar, LogBox } from "react-native";
+import { StatusBar, LogBox, ActivityIndicator, View, Text, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-
+import API from "../API/API.js";
 import Screen from "../layout/Screen"; 
 import ModuleList from "../entity/modules/ModuleList.js";
 import { ButtonTray, Button  } from "../UI/Button.js";
@@ -18,42 +18,53 @@ const ModuleListScreen = () => {
 
     const [ modules, isLoading, setModules, loadModules ] = useLoad(modulesEndpoint); 
     
-    const handleDelete = (module) => { 
-        setModules(modules.filter((item) => item.ModuleID !== module.ModuleID));
+    const onDelete = async (module) => {
+        const deleteEndpoint = `${modulesEndpoint}/${module.ModuleID}`;
+        const result = await API.delete(deleteEndpoint, module);
+        console.log(result);
+        if (result.isSuccess) {
+            loadModules(modulesEndpoint);
+            navigation.navigate('ModuleListScreen');
+        } else { Alert.alert(result.message); }
     };
 
-    const onDelete = (module) => {
-        handleDelete(module);
-        navigation.navigate('ModuleListScreen');
+    const onAdd = async (module) => {
+        const result = await API.post(modulesEndpoint, module);
+        console.log(result);
+        if (result.isSuccess) {
+            loadModules(modulesEndpoint);
+            navigation.goBack();
+        } else { Alert.alert(result.message); }
     };
 
-    const handleAdd = (module) => setModules([...modules, module]);
-
-    const handleModify = (updatedModule) => setModules( modules.map((module) => (module.ModuleID === updatedModule.ModuleID) ?  updatedModule : module));
-
-    const onAdd = (module) => {
-        handleAdd(module);
-        navigation.navigate('ModuleListScreen');
-    };
-
-    const onModify = (module) => {
-        handleModify(module);
-        navigation.navigate('ModuleListScreen');
-    };
+    const onModify = async (module) => {
+        const putEndpoint = `${modulesEndpoint}/${module.ModuleID}`;
+        const result = await API.put(putEndpoint, module);
+        if (result.isSuccess) {
+            loadModules(modulesEndpoint);
+            navigation.navigate('ModuleListScreen');
+        } else { Alert.alert(result.message); }
+    }
 
     const gotoViewScreen = (module) => navigation.navigate('ModuleViewScreen', { module, onDelete, onModify });
 
-    const gotoAddScreen = () => { navigation.navigate('ModuleAddScreen', { onAdd }); };  
+    const gotoAddScreen = () => { navigation.navigate('ModuleAddScreen', { onAdd }); };
 
-    return ( 
+    return (
         <Screen>
             <StatusBar barStyle="light-content" />
             <ButtonTray>
                 <Button styleButton={{ borderBottomLeftRadius: 0, borderBottomRightRadius: 0, borderBottomWidth: 1, borderWidth: 0 }} icon={<Icons.Add size={20}/>} label="Add" onPress={gotoAddScreen} />
             </ButtonTray>
+            {isLoading && (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text>Loading Information...</Text>
+                    <ActivityIndicator size='64' color="#0000ff" />
+                </View>
+            )}
             <ModuleList modules={modules} onSelect={gotoViewScreen} isLoading={isLoading} />
         </Screen>
     );
 };
 
-export default ModuleListScreen; 
+export default ModuleListScreen;

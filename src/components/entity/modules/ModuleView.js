@@ -23,6 +23,7 @@ const ModuleView = ({ module, placeHolderText, onModify, onDelete }) => {
             <Text style={styles.subtitle}> {module.ModuleName}</Text>
             <Image style={styles.image} source={{ uri: module.ModuleImageURL }} />
             <Text style={styles.detail}>Level: {module.ModuleLevel}</Text>
+            <Text style={styles.detail}>Cohort: {module.ModuleYearName}</Text>
             <Text style={styles.detail}>Module Leader: {module.ModuleLeaderName}</Text>
 
             <ButtonTray>
