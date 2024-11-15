@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { StatusBar, LogBox } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -6,27 +6,20 @@ import Screen from "../layout/Screen";
 import ModuleList from "../entity/modules/ModuleList.js";
 import { ButtonTray, Button  } from "../UI/Button.js";
 import Icons from "../UI/Icons.js";
-import API from "../API/API.js";
+import useLoad from "../API/useLoad.js";
 
 const ModuleListScreen = () => {
     LogBox.ignoreLogs(['Non-serializable values were found in the navigation state']);
 
-    const modulesEndpoint = 'https://softwarehub.uk/unibase/api/modules'
+    const modulesEndpoint = 'https://softwarehub.uk/unibase/api/modules';
+    // const usersEndpoint = 'https://softwarehub.uk/unibase/api/users';
 
     const navigation = useNavigation();
-    const [modules, setModules] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+
+    const [ modules, isLoading, setModules, loadModules ] = useLoad(modulesEndpoint); 
     
-    const loadMoudles = async (endpoint) => {
-        const response = await API.get(endpoint);
-        setIsLoading(false);
-        if (response.isSuccess) setModules(response.result);
-    }
-
-    useEffect(() => { loadMoudles(modulesEndpoint); }, []);
-
     const handleDelete = (module) => { 
-        setModules(modules.filter((item) => item.ModuleID !== module.ModuleID)); 
+        setModules(modules.filter((item) => item.ModuleID !== module.ModuleID));
     };
 
     const onDelete = (module) => {

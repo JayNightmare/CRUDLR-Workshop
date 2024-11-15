@@ -33,7 +33,7 @@ const InputText = ({ label, value, onChange }) => {
     )
 }
 
-const InputSelect = ({ label, prompt, options, value, onChange }) => {
+const InputSelect = ({ label, prompt, options, value, onChange, isLoading }) => {
     return (
         <View style={styles.inputView}>
             <Text style={styles.label}>{label}</Text>
