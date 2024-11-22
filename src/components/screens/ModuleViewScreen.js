@@ -23,14 +23,14 @@ Amet sit ridiculus sociosqu nibh, mollis et porttitor. Cursus quam eu mollis arc
     return (
         <Screen>
             <StatusBar barStyle="light-content" />
-            <ModuleView 
-                key={module.ModuleCode} 
-                module={module} 
-                onDelete={onDelete} 
-                onModify={gotoModifyScreen} 
+            <ModuleView
+                key={module.ModuleCode}
+                module={module}
+                onDelete={onDelete}
+                onModify={gotoModifyScreen}
                 placeHolderText={placeHolderText}>
             </ModuleView>
-        </Screen> 
+        </Screen>
     )
 };
 
