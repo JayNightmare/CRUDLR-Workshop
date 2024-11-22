@@ -1,4 +1,5 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import Selector from "../../UI/Selector";
  
 const ModuleItem = ({ module, onSelect }) => {
     return (
@@ -6,11 +7,11 @@ const ModuleItem = ({ module, onSelect }) => {
             {/* Main row container */}
             <View style={styles.row}>
                 {/* Pressable for selecting the module */}
-                <TouchableOpacity onPress={() => onSelect(module)} style={styles.textContainer}>
+                <Selector onPress={() => onSelect(module)} pressedStyle={styles.pressedItem}  style={styles.textContainer}>
                     <Text style={styles.moduleNameText}>
                         <Text style={{ fontWeight: "bold" }}>{module.ModuleCode}</Text> | {module.ModuleName}
                     </Text>
-                </TouchableOpacity>
+                </Selector>
             </View>
         </View>
     ); 
@@ -18,9 +19,10 @@ const ModuleItem = ({ module, onSelect }) => {
 
 const styles = StyleSheet.create({
     cardContainer: {
-        marginVertical: 5,
-        marginHorizontal: 10,
-        marginBottom: 10, // Add a margin below the card
+        // marginVertical: 5,
+        // marginHorizontal: 10,
+        marginTop: 10,
+        marginBottom: 20,
         paddingHorizontal: 10,
         paddingVertical: 12,
         
@@ -62,6 +64,12 @@ const styles = StyleSheet.create({
     removeButton: {
         padding: 5, 
     },
+
+    pressedItem: {
+        // backgroundColor: 'rgba(155, 155, 155, 0.5)',
+        transform: [{ scale: 0.95 }],
+        opacity: 0.8,
+    }
 });
 
 export default ModuleItem;

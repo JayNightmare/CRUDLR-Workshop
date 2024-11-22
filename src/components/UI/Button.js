@@ -1,4 +1,5 @@
-import { Pressable, StyleSheet, Text, View } from "react-native"
+import { StyleSheet, Text, View } from "react-native";
+import Selector from "./Selector";
 
 export const ButtonTray = ({ children }) => {
     return (
@@ -10,10 +11,10 @@ export const ButtonTray = ({ children }) => {
 
 export const Button = ({ icon, label, onPress, styleLabel, styleButton }) => {
     return (
-        <Pressable onPress={onPress} style={[styles.button, styleButton]}>
+        <Selector onPress={onPress} style={[styles.button, styleButton]} pressedStyle={styles.pressedButton}>
             { icon || null }
             <Text style={[styles.label, styleLabel]}>{label}</Text>
-        </Pressable>
+        </Selector>
     );
 };
 
@@ -38,6 +39,11 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 16,
     },
-})
+    pressedButton: {
+        // backgroundColor: 'rgba(155, 155, 155, 0.5)',
+        transform: [{ scale: 0.95 }],
+        opacity: 0.8,
+    }
+});
 
 export default { Button, ButtonTray };
