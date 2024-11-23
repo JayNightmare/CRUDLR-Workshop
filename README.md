@@ -1,7 +1,7 @@
 <div align="center">
     <img src="./src/images/react-image.png" height="128" >
 </div>
-
+ 
 <div align=center>
     <h1>Kingston University</h1>
     <h3>React Native App Development</h3>
