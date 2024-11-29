@@ -54,7 +54,7 @@ const InputSelect = ({ label, prompt, options, value, onChange, isLoading }) => 
 
 Form.InputText = InputText;
 Form.InputSelect = InputSelect;
-
+    
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     input: {
         marginVertical: 5,
         marginHorizontal: 10,
+
         backgroundColor: "#e8e8e8", 
         borderRadius: 8,
         elevation: 2, 
@@ -89,8 +90,10 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 1,
         shadowRadius: 5,
+        
         paddingHorizontal: 10,
         paddingVertical: 12,
+
         borderColor: "#cccc", // Add a bottom border
         borderWidth: 1,
         marginBottom: 20, // Add a margin below the card
